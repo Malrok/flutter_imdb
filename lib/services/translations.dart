@@ -22,7 +22,7 @@ class Translations {
 
   static Future<Translations> load(Locale locale) async {
     Translations translations = new Translations(locale);
-    String jsonContent = await rootBundle.loadString("i18n/${locale.languageCode}.json");
+    String jsonContent = await rootBundle.loadString("assets/i18n/${locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
     return translations;
   }

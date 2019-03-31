@@ -70,4 +70,4 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
   assets:
-  - i18n/en.json
+  - assets/i18n/en.json
