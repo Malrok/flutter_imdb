@@ -1,5 +1,5 @@
 class MovieModel {
-  String id;
+  int id;
   String title;
   String overview;
   String posterSmall;
@@ -13,7 +13,7 @@ class MovieModel {
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     MovieModel _model = MovieModel();
-    _model.id = json['imdb_id'];
+    _model.id = json['id'];
     _model.title = json['title'];
     _model.overview = json['overview'];
     _model.posterSmall = json['poster_path'];
