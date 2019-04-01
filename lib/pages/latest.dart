@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_imdb/blocs/bloc_provider.dart';
 import 'package:flutter_imdb/blocs/latest_bloc.dart';
 import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/pages/detail.dart';
 import 'package:flutter_imdb/widgets/movie-card.dart';
 
 class LatestMovies extends StatefulWidget {
@@ -26,8 +27,14 @@ class LatestMoviesState extends State<LatestMovies> {
                 padding: const EdgeInsets.all(16.0),
                 itemBuilder: (context, index) {
                   return MovieCard(
-                    movie: snapshot.data[index]
-                  );
+                      movie: snapshot.data[index],
+                      onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                      movieId: snapshot.data[index].id,
+                                    )),
+                          ));
                 },
                 itemCount: snapshot.data.length,
               );

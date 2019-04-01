@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_imdb/blocs/bloc_provider.dart';
 import 'package:flutter_imdb/blocs/detail_bloc.dart';
 import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/services/translations.dart';
 import 'package:flutter_imdb/widgets/poster.dart';
 
 class DetailPage extends StatelessWidget {
@@ -12,7 +13,10 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Detail(movieId: this.movieId);
+    return Scaffold(
+        appBar:
+            AppBar(title: Text(Translations.of(context).text('detail_title'))),
+        body: Detail(movieId: this.movieId));
   }
 }
 
@@ -39,20 +43,24 @@ class DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        bloc: _detailBloc,
-        child: StreamBuilder<MovieModel>(
-            stream: _detailBloc.movieDetail,
-            builder:
-                (BuildContext context, AsyncSnapshot<MovieModel> snapshot) {
-              if (snapshot.hasData) {
-                return Poster(
-                  image: snapshot.data.posterSmall,
-                  small: true,
-                );
-              } else {
-                return Container();
-              }
-            }));
+    return Container(
+        padding: EdgeInsets.all(16.0),
+        child: BlocProvider(
+            bloc: _detailBloc,
+            child: StreamBuilder<MovieModel>(
+                stream: _detailBloc.movieDetail,
+                builder:
+                    (BuildContext context, AsyncSnapshot<MovieModel> snapshot) {
+                  if (snapshot.hasData) {
+                    return Row(children: [
+                      Poster(
+                        image: snapshot.data.posterSmall,
+                        small: true,
+                      )
+                    ]);
+                  } else {
+                    return Container();
+                  }
+                })));
   }
 }

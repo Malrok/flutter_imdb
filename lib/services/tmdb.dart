@@ -74,7 +74,8 @@ class TheMovieDatabaseService {
 
   Future<MovieModel> getMovieById(int movieId) async {
     MovieModel movie;
-    final response = await http.get('$_URL/movie/$movieId&$_API_KEY');
+    var url = '$_URL/movie/$movieId?$_API_KEY';
+    final response = await http.get(url);
     if (response.statusCode == 200) {
       final body = json.decode(response.body);
       movie = MovieModel.fromJson(body);

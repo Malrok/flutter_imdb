@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_imdb/blocs/bloc_provider.dart';
 import 'package:flutter_imdb/blocs/search_bloc.dart';
 import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/pages/detail.dart';
 import 'package:flutter_imdb/services/translations.dart';
 import 'package:flutter_imdb/widgets/movie-card.dart';
 
@@ -49,7 +50,14 @@ class SearchMovieState extends State<SearchMovie> {
                       if (snapshot.hasData) {
                         return ListView.builder(
                           itemBuilder: (context, index) {
-                            return MovieCard(movie: snapshot.data[index]);
+                            return MovieCard(
+                                movie: snapshot.data[index],
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                              movieId: snapshot.data[index].id,
+                                            ))));
                           },
                           itemCount: snapshot.data.length,
                         );
