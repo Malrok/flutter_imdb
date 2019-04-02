@@ -71,3 +71,4 @@ flutter:
   # see https://flutter.io/custom-fonts/#from-packages
   assets:
   - assets/i18n/en.json
+  - assets/images/poster.png
