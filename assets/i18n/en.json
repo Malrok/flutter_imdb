@@ -1,5 +1,7 @@
 {
   "home_title": "MRKMovies",
+  "home_tab_recent": "Latest movies",
+  "home_tab_search": "Search",
   "search_placeholder": "Movie's title",
   "detail_title": "Detail"
 }

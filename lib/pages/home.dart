@@ -25,17 +25,18 @@ class HomeState extends State<Home> {
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.alarm)),
-              Tab(icon: Icon(Icons.search))
+              Tab(
+                  text: Translations.of(context).text('home_tab_recent'),
+                  icon: Icon(Icons.local_movies)),
+              Tab(
+                  text: Translations.of(context).text('home_tab_search'),
+                  icon: Icon(Icons.search))
             ],
           ),
           title: Text(Translations.of(context).text('home_title')),
         ),
         body: TabBarView(
-          children: [
-            LatestMovies(),
-            SearchMovie()
-          ],
+          children: [LatestMovies(), SearchMovie()],
         ),
       ),
     );

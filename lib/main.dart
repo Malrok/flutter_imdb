@@ -3,9 +3,9 @@ import 'package:flutter_imdb/pages/home.dart';
 import 'package:flutter_imdb/services/translations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(FlutterImdbApp());
 
-class MyApp extends StatelessWidget {
+class FlutterImdbApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
