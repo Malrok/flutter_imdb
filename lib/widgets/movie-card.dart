@@ -33,8 +33,10 @@ class MovieCard extends StatelessWidget {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(this.movie.title),
-                                    Text(DateFormat('dd/MM/yyyy')
-                                        .format(this.movie.release))
+                                    Text(this.movie.release != null
+                                        ? DateFormat('dd/MM/yyyy')
+                                            .format(this.movie.release)
+                                        : '')
                                   ]))),
                       Text(this.movie.voteAverage.toString())
                     ]))));

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter_imdb/models/configuration.dart';
 import 'package:flutter_imdb/models/movie.dart';
-import 'package:flutter_imdb/models/tmdb.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -10,31 +10,46 @@ class TheMovieDatabaseService {
   static const String _API_KEY = 'api_key=48d02d2803f669be5643367e3307dd43';
   static const String _LANG = 'language=fr-FR';
 
-  TmdbModel configuration;
+  ConfigurationModel configuration;
 
   TheMovieDatabaseService() {
     this._getConfiguration();
   }
 
-  Future<dynamic> _getConfiguration() async {
-    final response = await http.get('$_URL/configuration?$_API_KEY');
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body);
-      this.configuration = TmdbModel.fromJson(body);
-    } else {
-      // If that response was not OK, throw an error.
-      throw Exception('Failed to load configuration');
-    }
+  void _getConfiguration() {
+    Map<String, dynamic> config;
+    Map<String, dynamic> genres;
+
+    http.get('$_URL/configuration?$_API_KEY').then((response) {
+      if (response.statusCode == 200) {
+         config = json.decode(response.body);
+      } else {
+        // If that response was not OK, throw an error.
+        throw Exception('Failed to load configuration');
+      }
+      return http.get('$_URL/genre/movie/list');
+    }).then((response) {
+      if (response.statusCode == 200) {
+        genres = json.decode(response.body);
+        this.configuration = ConfigurationModel.fromJson(config, genres);
+      } else {
+        // If that response was not OK, throw an error.
+        throw Exception('Failed to load configuration');
+      }
+    });
   }
 
   Future<List<MovieModel>> getRecentMoviesList() async {
     List<MovieModel> movies;
     final now = DateTime.now();
     final response = await http.get(_URL +
-        '/discover/movie?primary_release_date.gte=' +
+        '/discover/movie?' +
+        'primary_release_date.gte=' +
         DateFormat('yyyy-MM-dd').format(now.subtract(new Duration(days: 30))) +
         '&primary_release_date.lte=' +
         DateFormat('yyyy-MM-dd').format(now) +
+        '&' +
+        _LANG +
         '&' +
         _API_KEY);
     if (response.statusCode == 200) {
@@ -42,7 +57,16 @@ class TheMovieDatabaseService {
       if (body['total_results'] > 0) {
         var results = body['results'] as List;
         movies = results.map((movie) => MovieModel.fromJson(movie)).toList();
-        movies.sort((a, b) => a.release.isBefore(b.release) ? 1 : -1);
+        movies.sort((a, b) {
+          if (a.release == null || b.release == null) {
+            return 0;
+          }
+          if (a.release.isBefore(b.release)) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
       } else {
         throw Exception('no results');
       }
@@ -56,7 +80,7 @@ class TheMovieDatabaseService {
   Future<List<MovieModel>> getMoviesListByTitle(String title) async {
     List<MovieModel> movies;
     final response = await http.get(
-        '$_URL/search/movie?query=${title.replaceAll(' ', '+')}&$_API_KEY');
+        '$_URL/search/movie?query=${title.replaceAll(' ', '+')}&$_LANG&$_API_KEY');
     if (response.statusCode == 200) {
       final body = json.decode(response.body);
       if (body['total_results'] > 0) {
@@ -74,7 +98,7 @@ class TheMovieDatabaseService {
 
   Future<MovieModel> getMovieById(int movieId) async {
     MovieModel movie;
-    var url = '$_URL/movie/$movieId?$_API_KEY';
+    var url = '$_URL/movie/$movieId?$_LANG&$_API_KEY';
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final body = json.decode(response.body);
@@ -85,6 +109,20 @@ class TheMovieDatabaseService {
     }
     return movie;
   }
+
+//  Future<MovieModel> getMovieById(int movieId) async {
+//    MovieModel movie;
+//    var url = '$_URL/movie/$movieId?$_API_KEY';
+//    final response = await http.get(url);
+//    if (response.statusCode == 200) {
+//      final body = json.decode(response.body);
+//      movie = MovieModel.fromJson(body);
+//    } else {
+//      // If that response was not OK, throw an error.
+//      throw Exception('Failed to load movies');
+//    }
+//    return movie;
+//  }
 }
 
 TheMovieDatabaseService tmdbService = TheMovieDatabaseService();

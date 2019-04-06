@@ -1,3 +1,5 @@
+import 'package:flutter_imdb/models/credits.dart';
+
 class MovieModel {
   int id;
   String title;
@@ -8,6 +10,10 @@ class MovieModel {
   int runtime;
   double voteAverage;
   int voteCount;
+  bool adult;
+  List<String> genres;
+
+  CreditsModel credits;
 
   MovieModel();
 
@@ -28,6 +34,7 @@ class MovieModel {
         print('exception while parsing date ${_model.release}');
       }
     }
+    _model.adult = json['adult'];
     return _model;
   }
 }
