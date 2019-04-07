@@ -19,7 +19,8 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     ..runtime = json['runtime'] as int
     ..voteAverage = (json['vote_average'] as num)?.toDouble()
     ..voteCount = json['vote_count'] as int
-    ..adult = json['adult'] as bool;
+    ..adult = json['adult'] as bool
+    ..genreIds = (json['genre_ids'] as List)?.map((e) => e as int)?.toList();
 }
 
 Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
@@ -33,5 +34,6 @@ Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
       'runtime': instance.runtime,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
-      'adult': instance.adult
+      'adult': instance.adult,
+      'genre_ids': instance.genreIds
     };

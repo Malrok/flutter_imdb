@@ -12,6 +12,8 @@ class TheMovieDatabaseService {
 
   ConfigurationModel configuration;
 
+  bool _initializing = true;
+
   TheMovieDatabaseService() {
     this._getConfiguration();
   }
@@ -32,6 +34,7 @@ class TheMovieDatabaseService {
       if (response.statusCode == 200) {
         genres = json.decode(response.body);
         this.configuration = ConfigurationModel.fromJson(config, genres);
+        this._initializing = false;
       } else {
         // If that response was not OK, throw an error.
         throw Exception('Failed to load configuration');
@@ -110,22 +113,12 @@ class TheMovieDatabaseService {
     return movie;
   }
 
-//  Future<MovieModel> getMovieById(int movieId) async {
-//    MovieModel movie;
-//    var url = '$_URL/movie/$movieId?$_API_KEY';
-//    final response = await http.get(url);
-//    if (response.statusCode == 200) {
-//      final body = json.decode(response.body);
-//      movie = MovieModel.fromJson(body);
-//    } else {
-//      // If that response was not OK, throw an error.
-//      throw Exception('Failed to load movies');
-//    }
-//    return movie;
-//  }
-
   String getGenresFromIds(List<int> genreIds) {
-    return genreIds.map((int genreId) => this.configuration.genres[genreId]).join(', ');
+    if (!this._initializing) {
+      return genreIds.map((int genreId) => this.configuration.genres[genreId]).join(', ');
+    } else {
+      return '';
+    }
   }
 
 }

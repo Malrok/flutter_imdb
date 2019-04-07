@@ -21,9 +21,9 @@ class MovieModel {
   @JsonKey(name: 'vote_count')
   int voteCount;
   bool adult;
+  @JsonKey(name: 'genre_ids')
+  List<int> genreIds;
 
-  @JsonKey(ignore: true)
-  List<String> genres;
   @JsonKey(ignore: true)
   List<CrewModel> crew;
   @JsonKey(ignore: true)
