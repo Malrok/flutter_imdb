@@ -11,7 +11,7 @@ class MovieModel {
   double voteAverage;
   int voteCount;
   bool adult;
-  List<String> genres;
+  List<int> genreIds;
 
   CreditsModel credits;
 
@@ -35,6 +35,7 @@ class MovieModel {
       }
     }
     _model.adult = json['adult'];
+    _model.genreIds = List<int>.from(json['genre_ids']);
     return _model;
   }
 }

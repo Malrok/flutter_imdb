@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/services/tmdb.dart';
 import 'package:flutter_imdb/widgets/poster.dart';
 import 'package:intl/intl.dart';
 
@@ -33,10 +34,10 @@ class MovieCard extends StatelessWidget {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(this.movie.title),
-                                    Text(this.movie.release != null
+                                    Text(tmdbService.getGenresFromIds(this.movie.genreIds) + ' - ' +  (this.movie.release != null
                                         ? DateFormat('dd/MM/yyyy')
                                             .format(this.movie.release)
-                                        : '')
+                                        : ''))
                                   ]))),
                       Text(this.movie.voteAverage.toString())
                     ]))));

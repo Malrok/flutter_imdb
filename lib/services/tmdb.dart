@@ -27,7 +27,7 @@ class TheMovieDatabaseService {
         // If that response was not OK, throw an error.
         throw Exception('Failed to load configuration');
       }
-      return http.get('$_URL/genre/movie/list');
+      return http.get('$_URL/genre/movie/list?$_API_KEY');
     }).then((response) {
       if (response.statusCode == 200) {
         genres = json.decode(response.body);
@@ -123,6 +123,11 @@ class TheMovieDatabaseService {
 //    }
 //    return movie;
 //  }
+
+  String getGenresFromIds(List<int> genreIds) {
+    return genreIds.map((int genreId) => this.configuration.genres[genreId]).join(', ');
+  }
+
 }
 
 TheMovieDatabaseService tmdbService = TheMovieDatabaseService();
