@@ -1,4 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'cast.g.dart';
+
+@JsonSerializable()
 class CastModel {
+  @JsonKey(name: 'cast_id')
   int castId;
   String name;
   String character;
@@ -7,10 +13,5 @@ class CastModel {
 
   CastModel();
 
-  CastModel.fromJson(Map<String, dynamic> json)
-      : castId = json['cast_id'],
-        name = json['name'],
-        character = json['character'],
-        id = json['id'],
-        order = json['order'];
+  factory CastModel.fromJson(Map<String, dynamic> json) => _$CastModelFromJson(json);
 }
