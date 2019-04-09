@@ -22,7 +22,7 @@ class MovieCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Poster(
-                        image: this.movie.posterSmall,
+                        image: this.movie.posterPath,
                         small: true,
                       ),
                       Expanded(

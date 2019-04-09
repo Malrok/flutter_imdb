@@ -10,10 +10,8 @@ class MovieModel {
   int id;
   String title;
   String overview;
-  @JsonKey(name: 'poster_small')
-  String posterSmall;
-  @JsonKey(name: 'poster_large')
-  String posterLarge;
+  @JsonKey(name: 'poster_path')
+  String posterPath;
   DateTime release;
   int runtime;
   @JsonKey(name: 'vote_average')

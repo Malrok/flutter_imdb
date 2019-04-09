@@ -14,14 +14,12 @@ class TheMovieDatabaseService {
 
   bool _initializing = true;
 
-  TheMovieDatabaseService() {
-    this._getConfiguration();
-  }
+  TheMovieDatabaseService();
 
-  Future<void> _getConfiguration() async {
+  Future<ConfigurationModel> getConfiguration() async {
     
     if (!this._initializing) {
-      return Future.value(null);
+      return Future.value(this.configuration);
     }
     
     Map<String, dynamic> config;
@@ -40,6 +38,7 @@ class TheMovieDatabaseService {
         genres = json.decode(response.body);
         this.configuration = ConfigurationModel.fromJson(config, genres);
         this._initializing = false;
+        return this.configuration;
       } else {
         // If that response was not OK, throw an error.
         throw Exception('Failed to load configuration');
@@ -48,7 +47,7 @@ class TheMovieDatabaseService {
   }
 
   Future<List<MovieModel>> getRecentMoviesList() async {
-    await this._getConfiguration();
+    await this.getConfiguration();
     
     List<MovieModel> movies;
     final now = DateTime.now();
@@ -88,7 +87,7 @@ class TheMovieDatabaseService {
   }
 
   Future<List<MovieModel>> getMoviesListByTitle(String title) async {
-    await this._getConfiguration();
+    await this.getConfiguration();
     
     List<MovieModel> movies;
     final response = await http.get(
@@ -109,7 +108,7 @@ class TheMovieDatabaseService {
   }
 
   Future<MovieModel> getMovieById(int movieId) async {
-    await this._getConfiguration();
+    await this.getConfiguration();
     
     MovieModel movie;
     var url = '$_URL/movie/$movieId?$_LANG&$_API_KEY';

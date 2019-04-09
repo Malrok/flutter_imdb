@@ -11,8 +11,7 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as int
     ..title = json['title'] as String
     ..overview = json['overview'] as String
-    ..posterSmall = json['poster_small'] as String
-    ..posterLarge = json['poster_large'] as String
+    ..posterPath = json['poster_path'] as String
     ..release = json['release'] == null
         ? null
         : DateTime.parse(json['release'] as String)
@@ -28,8 +27,7 @@ Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
       'id': instance.id,
       'title': instance.title,
       'overview': instance.overview,
-      'poster_small': instance.posterSmall,
-      'poster_large': instance.posterLarge,
+      'poster_path': instance.posterPath,
       'release': instance.release?.toIso8601String(),
       'runtime': instance.runtime,
       'vote_average': instance.voteAverage,

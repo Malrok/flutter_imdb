@@ -54,7 +54,7 @@ class DetailState extends State<Detail> {
                   if (snapshot.hasData) {
                     return Row(children: [
                       Poster(
-                        image: snapshot.data.posterSmall,
+                        image: snapshot.data.posterPath,
                         small: true,
                       )
                     ]);
