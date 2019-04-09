@@ -18,11 +18,16 @@ class TheMovieDatabaseService {
     this._getConfiguration();
   }
 
-  void _getConfiguration() {
+  Future<void> _getConfiguration() async {
+    
+    if (this._initializing) {
+      return Future.value(null);
+    }
+    
     Map<String, dynamic> config;
     Map<String, dynamic> genres;
 
-    http.get('$_URL/configuration?$_API_KEY').then((response) {
+    return http.get('$_URL/configuration?$_API_KEY').then((response) {
       if (response.statusCode == 200) {
          config = json.decode(response.body);
       } else {
@@ -43,6 +48,8 @@ class TheMovieDatabaseService {
   }
 
   Future<List<MovieModel>> getRecentMoviesList() async {
+    await this._getConfiguration();
+    
     List<MovieModel> movies;
     final now = DateTime.now();
     final response = await http.get(_URL +
@@ -81,6 +88,8 @@ class TheMovieDatabaseService {
   }
 
   Future<List<MovieModel>> getMoviesListByTitle(String title) async {
+    await this._getConfiguration();
+    
     List<MovieModel> movies;
     final response = await http.get(
         '$_URL/search/movie?query=${title.replaceAll(' ', '+')}&$_LANG&$_API_KEY');
@@ -100,6 +109,8 @@ class TheMovieDatabaseService {
   }
 
   Future<MovieModel> getMovieById(int movieId) async {
+    await this._getConfiguration();
+    
     MovieModel movie;
     var url = '$_URL/movie/$movieId?$_LANG&$_API_KEY';
     final response = await http.get(url);
