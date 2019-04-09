@@ -20,7 +20,7 @@ class TheMovieDatabaseService {
 
   Future<void> _getConfiguration() async {
     
-    if (this._initializing) {
+    if (!this._initializing) {
       return Future.value(null);
     }
     
