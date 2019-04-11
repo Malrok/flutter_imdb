@@ -12,6 +12,7 @@ class MovieModel {
   String overview;
   @JsonKey(name: 'poster_path')
   String posterPath;
+  @JsonKey(name: 'release_date')
   DateTime release;
   int runtime;
   @JsonKey(name: 'vote_average')

@@ -12,9 +12,9 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     ..title = json['title'] as String
     ..overview = json['overview'] as String
     ..posterPath = json['poster_path'] as String
-    ..release = json['release'] == null
+    ..release = json['release_date'] == null
         ? null
-        : DateTime.parse(json['release'] as String)
+        : DateTime.parse(json['release_date'] as String)
     ..runtime = json['runtime'] as int
     ..voteAverage = (json['vote_average'] as num)?.toDouble()
     ..voteCount = json['vote_count'] as int
@@ -28,7 +28,7 @@ Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
       'title': instance.title,
       'overview': instance.overview,
       'poster_path': instance.posterPath,
-      'release': instance.release?.toIso8601String(),
+      'release_date': instance.release?.toIso8601String(),
       'runtime': instance.runtime,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
