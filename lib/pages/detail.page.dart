@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_imdb/blocs/bloc_provider.dart';
-import 'package:flutter_imdb/blocs/detail_bloc.dart';
-import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/blocs/detail.bloc.dart';
+import 'package:flutter_imdb/models/movie.model.dart';
 import 'package:flutter_imdb/services/tmdb.dart';
 import 'package:flutter_imdb/services/translations.dart';
-import 'package:flutter_imdb/widgets/poster.dart';
+import 'package:flutter_imdb/widgets/poster.widget.dart';
 import 'package:intl/intl.dart';
 
 class DetailPage extends StatelessWidget {
