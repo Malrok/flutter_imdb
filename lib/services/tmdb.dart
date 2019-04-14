@@ -124,7 +124,7 @@ class TheMovieDatabaseService {
   }
 
   String getGenresFromIds(List<int> genreIds) {
-    if (!this._initializing) {
+    if (!this._initializing && genreIds != null) {
       return genreIds.map((int genreId) => this.configuration.genres[genreId]).join(', ');
     } else {
       return '';

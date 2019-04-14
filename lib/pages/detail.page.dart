@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_imdb/blocs/bloc_provider.dart';
-import 'package:flutter_imdb/blocs/detail.bloc.dart';
-import 'package:flutter_imdb/daos/movie.dao.dart';
-import 'package:flutter_imdb/models/movie.model.dart';
+import 'package:flutter_imdb/blocs/detail_bloc.dart';
+import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/services/tmdb.dart';
 import 'package:flutter_imdb/services/translations.dart';
-import 'package:flutter_imdb/widgets/poster.widget.dart';
+import 'package:flutter_imdb/widgets/poster.dart';
+import 'package:intl/intl.dart';
 
 class DetailPage extends StatelessWidget {
   final int movieId;
@@ -42,10 +43,6 @@ class DetailState extends State<Detail> {
     _detailBloc = DetailBloc(this.movieId);
   }
 
-  void addToFavorites(MovieModel movie) {
-    MovieDao().insert(movie);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,16 +54,34 @@ class DetailState extends State<Detail> {
                 builder:
                     (BuildContext context, AsyncSnapshot<MovieModel> snapshot) {
                   if (snapshot.hasData) {
-                    return Row(children: [
-                      Poster(
-                        image: snapshot.data.posterPath,
-                        small: true,
-                      ),
-                      RaisedButton(
-                        onPressed: () => addToFavorites(snapshot.data),
-                        child: const Text('Disabled Button'),
-                      ),
-                    ]);
+                    return Container(
+                        margin: EdgeInsets.all(16),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Poster(
+                                image: snapshot.data.posterPath,
+                                small: true,
+                              ),
+                              Expanded(
+                                  child: Container(
+                                      padding: new EdgeInsets.only(left: 8.0),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(snapshot.data.title),
+                                            Text(tmdbService.getGenresFromIds(
+                                                    snapshot.data.genreIds) +
+                                                ' - ' +
+                                                (snapshot.data.release != null
+                                                    ? DateFormat('dd/MM/yyyy')
+                                                        .format(snapshot
+                                                            .data.release)
+                                                    : ''))
+                                          ]))),
+                              Text(snapshot.data.voteAverage.toString())
+                            ]));
                   } else {
                     return Container();
                   }

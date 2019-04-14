@@ -15,3 +15,15 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
 "# flutter_imdb" 
+
+## About json
+
+json serialization is based on class generation
+
+### One-time code generation
+
+`flutter packages pub run build_runner build` in the project root
+
+### Generating code continuously
+
+`flutter packages pub run build_runner watch`
