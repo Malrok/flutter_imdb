@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_imdb/models/configuration.dart';
+import 'package:flutter_imdb/models/configuration.model.dart';
 import 'package:flutter_imdb/services/tmdb.dart';
 
 class Poster extends StatelessWidget {

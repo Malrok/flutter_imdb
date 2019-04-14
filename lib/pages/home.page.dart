@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_imdb/pages/latest.dart';
-import 'package:flutter_imdb/pages/search.dart';
+import 'package:flutter_imdb/pages/latest.page.dart';
+import 'package:flutter_imdb/pages/search.page.dart';
 import 'package:flutter_imdb/services/translations.dart';
 
 class HomePage extends StatelessWidget {

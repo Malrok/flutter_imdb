@@ -1,8 +1,8 @@
-import 'package:flutter_imdb/models/cast.dart';
-import 'package:flutter_imdb/models/crew.dart';
+import 'package:flutter_imdb/models/cast.model.dart';
+import 'package:flutter_imdb/models/crew.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'movie.g.dart';
+part 'movie.model.g.dart';
 
 @JsonSerializable()
 
@@ -30,4 +30,10 @@ class MovieModel {
   MovieModel();
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => _$MovieModelFromJson(json);
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = _$MovieModelToJson(this);
+    json.remove('genre_ids');
+    return json;
+  }
 }

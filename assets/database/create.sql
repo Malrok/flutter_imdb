@@ -1,0 +1,2 @@
+CREATE TABLE movies (id INTEGER PRIMARY KEY, title TEXT, overview TEXT, poster_path TEXT, release INTEGER, runtime INTEGER, vote_average REAL, vote_count INTEGER, adult INTEGER);
+CREATE TABLE cast (id INTEGER PRIMARY KEY, name TEXT, character TEXT, cast_id INTEGER, order INTEGER);

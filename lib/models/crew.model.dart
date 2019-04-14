@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'crew.g.dart';
+part 'crew.model.g.dart';
 
 @JsonSerializable()
 class CrewModel {

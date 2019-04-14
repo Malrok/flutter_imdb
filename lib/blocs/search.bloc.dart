@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_imdb/blocs/bloc_provider.dart';
-import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/models/movie.model.dart';
 import 'package:flutter_imdb/services/tmdb.dart';
 
 class SearchBloc extends BlocBase {

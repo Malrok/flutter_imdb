@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'cast.g.dart';
+part 'cast.model.g.dart';
 
 @JsonSerializable()
 class CastModel {

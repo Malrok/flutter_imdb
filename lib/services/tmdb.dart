@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_imdb/models/configuration.dart';
-import 'package:flutter_imdb/models/movie.dart';
+import 'package:flutter_imdb/models/configuration.model.dart';
+import 'package:flutter_imdb/models/movie.model.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_imdb/blocs/bloc_provider.dart';
-import 'package:flutter_imdb/blocs/latest_bloc.dart';
-import 'package:flutter_imdb/models/movie.dart';
-import 'package:flutter_imdb/pages/detail.dart';
-import 'package:flutter_imdb/widgets/movie-card.dart';
+import 'package:flutter_imdb/blocs/latest.bloc.dart';
+import 'package:flutter_imdb/models/movie.model.dart';
+import 'package:flutter_imdb/pages/detail.page.dart';
+import 'package:flutter_imdb/widgets/movie-card.widget.dart';
 
 class LatestMovies extends StatefulWidget {
   @override
