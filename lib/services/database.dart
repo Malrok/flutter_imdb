@@ -38,5 +38,3 @@ class DBProvider {
     });
   }
 }
-
-DBProvider dbProvider = DBProvider();

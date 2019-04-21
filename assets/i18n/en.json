@@ -2,6 +2,7 @@
   "home_title": "MRKMovies",
   "home_tab_recent": "Latest movies",
   "home_tab_search": "Search",
+  "home_tab_favorites": "Favorites",
   "search_placeholder": "Movie's title",
   "detail_title": "Detail"
 }

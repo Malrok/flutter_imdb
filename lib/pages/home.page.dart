@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_imdb/pages/favorites.page.dart';
 import 'package:flutter_imdb/pages/latest.page.dart';
 import 'package:flutter_imdb/pages/search.page.dart';
 import 'package:flutter_imdb/services/translations.dart';
@@ -20,7 +21,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3 ,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
@@ -30,13 +31,16 @@ class HomeState extends State<Home> {
                   icon: Icon(Icons.local_movies)),
               Tab(
                   text: Translations.of(context).text('home_tab_search'),
-                  icon: Icon(Icons.search))
+                  icon: Icon(Icons.search)),
+              Tab(
+                  text: Translations.of(context).text('home_tab_favorites'),
+                  icon: Icon(Icons.favorite))
             ],
           ),
           title: Text(Translations.of(context).text('home_title')),
         ),
         body: TabBarView(
-          children: [LatestMovies(), SearchMovie()],
+          children: [LatestMovies(), SearchMovie(), FavoriteMovies()],
         ),
       ),
     );

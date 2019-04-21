@@ -1,11 +1,11 @@
 import 'package:flutter_imdb/models/cast.model.dart';
 import 'package:flutter_imdb/models/crew.model.dart';
+import 'package:flutter_imdb/models/favorite.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.model.g.dart';
 
 @JsonSerializable()
-
 class MovieModel {
   int id;
   String title;
@@ -30,11 +30,22 @@ class MovieModel {
 
   MovieModel();
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) => _$MovieModelFromJson(json);
+  factory MovieModel.fromJson(Map<String, dynamic> json) =>
+      _$MovieModelFromJson(json);
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = _$MovieModelToJson(this);
     json.remove('genre_ids');
     return json;
   }
+
+  FavoriteModel toFavorite() => FavoriteModel()
+    ..id = this.id
+    ..title = this.title
+    ..overview = this.overview
+    ..posterPath = this.posterPath
+    ..release = this.release
+    ..runtime = this.runtime
+    ..voteAverage = this.voteAverage
+    ..voteCount = this.voteCount;
 }
